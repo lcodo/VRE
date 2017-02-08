@@ -1,5 +1,5 @@
 
-#VRE 
+# VRE 
 MuG VRE is a web application aimed to allow MuG users to access MuG data and explore and exploit it together with its own data via a selection of tools and visualizers.
 It is written in PHP, HTML and Javascript.
 
