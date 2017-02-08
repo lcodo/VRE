@@ -1,0 +1,90 @@
+<?php
+	$cmd = "pwd";
+	$pwd = exec($cmd);
+	$dirs = preg_split('/\//',$pwd);
+	#array_shift($dirs);
+	#array_shift($dirs);
+	array_shift($dirs);
+	array_shift($dirs);
+	$pwd = implode($dirs,'/');
+logger("PWD: $pwd");
+?>
+
+<div id="AtomPairs">
+        <?php
+
+                $cmd = "ls -t *.png";
+                $out = exec($cmd,$files);
+                $length = count($files);
+
+		$pairCont = 0;
+		$bpAnt = '';
+		print "<table align='center' cellpadding='10'><tr>\n";
+	        for($cont=0;$cont<$length;$cont++){
+			# distanceMean.contactMapSTDEV.png
+			# GC.Twist-Roll.ExpVsMD.png
+                        $file = $files[$cont];
+                        $parts = preg_split('/\./',$file);
+                        #$num = $parts[1];
+                        $num = $parts[0].".".$parts[1];
+			$code = "$parts[0].$parts[1]";
+	
+			if($bpAnt != $parts[0]){
+				print "</table>\n";
+				print "<h4 style='font-size: large'>Base Pair Step: $parts[0]</h4>\n";
+				print "<table align='center' cellpadding='10'>\n";
+			}	
+?>
+			<td><div>
+			<p id='dist<?php echo $num ?>' class='curvesText'><a id='dist<?php echo $num ?>Sel' class='unselected' href="javascript:selectDist('<?php echo $num ?>');" title='Dist: <?php echo $num ?>'><?php echo $code ?></a></p>
+                        </div></td>
+<?php
+			$pairCont++;
+			if($pairCont % 6 == 0){
+				print "</tr><tr>\n";
+			}
+			$bpAnt = $parts[0];
+                }
+		print "</tr></table>\n";
+?>
+</div>
+
+<div id="AtomPairsPlots">
+        <?php
+
+                $cmd = "ls -t *.png";
+                $out = exec($cmd,$files2);
+                $length = count($files2);
+
+		$pairCont = 0;
+		print "<table align='center' cellpadding='0'><tr>\n";
+	        for($cont=0;$cont<$length;$cont++){
+			# distanceMean.contactMapSTDEV.png
+                        $file = $files2[$cont];
+                        $parts = preg_split('/\./',$file);
+                        #$num = $parts[1];
+                        $num = $parts[0].".".$parts[1];
+			$p2 = strtolower($parts[1]);
+			$dat = "$parts[0].$p2.tgz";
+?>
+			<td><div id='<?php echo $num ?>Plot' class='hidden'>
+
+			<img border='1' width='600' src="<?php echo $GLOBALS[homeURL] ?>/<?php echo "$pwd/$file" ?>" border="0" width="300" align="center">
+
+			<table align="center" border="0"><tr><td>
+			<p align="right" class="curvesDatText" onClick="window.open('<?php echo $GLOBALS[homeURL] ?>/<?php echo "$pwd/$file" ?>','', '_blank,resize=1,width=700,height=700');">Open in New Window</p><br/>
+			</td><td>
+			<a href="getFile.php?fileloc=<?php echo "$pwd/$dat" ?>&type=curves"> <p align="right" class="curvesDatText">Download Raw Data</p></a>
+			</td></tr></table>
+
+                        </div></td>
+<?php
+			$pairCont++;
+			if($pairCont>=6){
+				print "</tr><tr>\n";
+			}
+                }
+		print "</tr></table>\n";
+?>
+</div>
+
