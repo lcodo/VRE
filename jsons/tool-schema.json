@@ -413,6 +413,10 @@
                 ],
                 "id": "http://multiscalegenomics.eu/tool-schema/output_files/7/file/compressed"
               },
+              "taxon_id": {
+                    "type": "integer",
+                    "id": "http://multiscalegenomics.eu/tool-schema/output_files/7/file/taxon_id"
+                  },
               "source_id": {
                 "type": "array",
                 "items": {
@@ -432,13 +436,9 @@
                     "type": "string",
                     "id": "http://multiscalegenomics.eu/tool-schema/output_files/7/file/meta_data/tool"
                   },
-                  "taxon_id": {
-                    "type": "integer",
-                    "id": "http://multiscalegenomics.eu/tool-schema/output_files/7/file/meta_data/taxon_id"
-                  },
-                  "reference_genome": {
+                  "assembly": {
                     "type": "string",
-                    "id": "http://multiscalegenomics.eu/tool-schema/output_files/7/file/meta_data/reference_genome"
+                    "id": "http://multiscalegenomics.eu/tool-schema/output_files/7/file/meta_data/assembly"
                   },
                   "visible": {
                     "type": "boolean",
@@ -458,7 +458,6 @@
             "required": [
               "file_type",
               "data_type",
-              "source_id",
               "meta_data "
             ]
           }
