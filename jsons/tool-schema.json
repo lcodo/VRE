@@ -27,7 +27,7 @@
       "type": "string",
       "id": "http://multiscalegenomics.eu/tool-schema/url"
     },
-    "doi": {
+    "publication": {
           "type": "string",
           "id": "http://multiscalegenomics.eu/tool-schema/doi"
     },
