@@ -504,7 +504,8 @@
       "properties": {
         "queue": {
           "type": "string",
-          "id": "http://multiscalegenomics.eu/tool-schema/definitions/SGE/queue"
+          "id": "http://multiscalegenomics.eu/tool-schema/definitions/SGE/queue",
+          "default":"null"
         },
         "executable": {
           "type": "string",
